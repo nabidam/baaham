@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"log"
 	"strings"
 
@@ -19,6 +20,7 @@ type Config struct {
 		UserName string
 		Password string
 		DBName   string
+		DSN      string
 	}
 
 	AppEnv    string
@@ -37,6 +39,8 @@ func Load() *Config {
 
 	v.SetDefault("APP_ENV", "development")
 	v.SetDefault("SERVER_PORT", "8080")
+	v.SetDefault("DATABASE_HOST", "localhost")
+	v.SetDefault("DATABASE_PORT", "5432")
 
 	if err := v.ReadInConfig(); err != nil {
 		log.Println("config: no .env file found, relying on env vars")
@@ -56,6 +60,11 @@ func Load() *Config {
 	cfg.Database.UserName = v.GetString("DATABASE_USERNAME")
 	cfg.Database.Password = v.GetString("DATABASE_PASSWORD")
 	cfg.Database.DBName = v.GetString("DATABASE_DBNAME")
+
+	cfg.Database.DSN = fmt.Sprintf(
+		"postgresql://%s:%s@%s:%s/%s",
+		cfg.Database.UserName, cfg.Database.Password, cfg.Database.Host, cfg.Database.Port, cfg.Database.DBName,
+	)
 
 	cfg.JWTSecret = v.GetString("JWT_SECRET")
 
