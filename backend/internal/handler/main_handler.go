@@ -3,11 +3,11 @@ package handler
 import "github.com/nabidam/baaham/internal/service"
 
 type MainHandler struct {
-	HealthHandler HealthHandler
+	HealthHandler *HealthHandler
 }
 
-func NewMainHandler(mainSvc service.MainService) *MainHandler {
+func NewMainHandler(mainSvc *service.MainService) *MainHandler {
 	healthHandler := NewHealthHandler(mainSvc.HealthService)
 
-	return &MainHandler{HealthHandler: *healthHandler}
+	return &MainHandler{HealthHandler: healthHandler}
 }
