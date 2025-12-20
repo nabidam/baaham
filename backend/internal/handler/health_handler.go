@@ -15,6 +15,11 @@ func NewHealthHandler(svc domain.HealthService) *HealthHandler {
 	return &HealthHandler{svc: svc}
 }
 
+// @Summary	Check health of system
+// @Schemes
+// @Description	Check health of system
+// @Produce		json
+// @Router			/health [get]
 func (h *HealthHandler) HealthCheck(c *gin.Context) {
 	status, err := h.svc.HealthCheck(c.Request.Context())
 	if err != nil {
