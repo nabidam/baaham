@@ -16,7 +16,6 @@ func New(
 	h *handler.MainHandler,
 ) *gin.Engine {
 	r := gin.New()
-	// r.Use(gin.Recovery())
 
 	// log all requests
 	r.Use(ginzap.Ginzap(cfg.Logger, time.RFC3339, true))
