@@ -5,6 +5,6 @@ import (
 	"github.com/nabidam/baaham/internal/handler"
 )
 
-func RegisterHelathRoutes(r *gin.Engine, h *handler.HealthHandler) {
-	r.GET("/health", h.HealthCheck)
+func RegisterHelathRoutes(api gin.IRoutes, h *handler.HealthHandler) {
+	api.GET("/health", h.HealthCheck)
 }

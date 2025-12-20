@@ -6,8 +6,13 @@ import (
 )
 
 func RegisterRoutes(r *gin.Engine, h *handler.MainHandler) {
-	// Health check
-	RegisterHelathRoutes(r, h.HealthHandler)
+	// Define routes
+	api := r.Group("/api/v1")
+	{
+		// Health check
+		RegisterHelathRoutes(api, h.HealthHandler)
+
+	}
 
 	// Health check (no auth)
 	// r.GET("/health")
