@@ -1,0 +1,18 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/health": {
+            "get": {
+                "description": "Check health of system",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Check health of system",
+                "responses": {}
+            }
+        }
+    }
+}

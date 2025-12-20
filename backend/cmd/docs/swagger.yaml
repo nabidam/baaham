@@ -1,0 +1,11 @@
+info:
+  contact: {}
+paths:
+  /health:
+    get:
+      description: Check health of system
+      produces:
+      - application/json
+      responses: {}
+      summary: Check health of system
+swagger: "2.0"
