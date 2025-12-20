@@ -1,21 +1,25 @@
 package handler
 
 import (
+	"context"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/nabidam/baaham/internal/service"
 )
 
 type IHealthHandler interface {
 	HealthCheck(*gin.Context)
 }
 
-type HealthHandler struct {
-	svc service.IHealthService
+type IHealthService interface {
+	HealthCheck(ctx context.Context) (bool, error)
 }
 
-func NewHealthHandler(svc service.IHealthService) *HealthHandler {
+type HealthHandler struct {
+	svc IHealthService
+}
+
+func NewHealthHandler(svc IHealthService) IHealthHandler {
 	return &HealthHandler{svc: svc}
 }
 
