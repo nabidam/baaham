@@ -1,0 +1,23 @@
+I want to build a project spec-driven using https://github.com/github/spec-kit this tool.
+read its guide and readme:
+https://github.com/github/spec-kit/blob/main/README.md
+also other resource, so you can help me with this request.
+
+now I tell you all of the project, and give me the steps in details to use the spec-kit and get the best result.
+The project is a “Watch-Together / Listen-Together + Whiteboard” real-time system.
+It has authentication system (with jwt user password).
+Users pre-registered. They login and join some rooms. Admin can create Room, and add some users using their username. A room is actually an isolated part that users can:
+1. chat together real-time.
+2. play a movie from list of files that pre-uploaded to server. control the playback together synced.
+3. play songs that pre-uploaded to server. control the playback synced.
+4. create playlists from existing songs for themselves or public (playlist type can be private or public)
+5. draw on a shared canvas together. it is a shared whiteboard that users can draw everything and shown to others.
+Backend is Go lang.
+Frontend would be Vite with Reactjs (typescript) and tailwind. Frontend communicates with backend using api + jwt and websockets for real-time actions.
+if it gets complicated for crowd rooms (rooms with more than 2 members). assume the project with rooms between just 2 users.
+now give me the step by step usage of spec-kit commands including:
+1. `/speckit.constitution`
+2. `/speckit.specify`
+3. `/speckit.plan`
+4. `/speckit.tasks`
+5. `/speckit.implement`
