@@ -13,11 +13,6 @@ import (
 )
 
 func main() {
-	// cfg := config.Load()
-	// db := database.Connect(cfg)
-	// server := api.NewServer(db)
-	// server.Run()
-
 	cfg := config.Load()
 	defer cfg.Logger.Sync()
 
@@ -25,20 +20,6 @@ func main() {
 	if err != nil {
 		cfg.Logger.Fatal("db init failed", zap.Error(err))
 	}
-
-	// pool, err := db.NewPool(
-	// 	context.Background(),
-	// 	db.Config{
-	// 		DSN:             cfg.Database.DSN,
-	// 		MaxConns:        10,
-	// 		MinConns:        2,
-	// 		HealthCheckSecs: 30,
-	// 	},
-	// 	cfg.Logger,
-	// )
-	// if err != nil {
-	// 	cfg.Logger.Fatal("db init failed", zap.Error(err))
-	// }
 
 	mainRepo := repository.NewMainRepository(db)
 	mainSvc := service.NewMainService(mainRepo)
