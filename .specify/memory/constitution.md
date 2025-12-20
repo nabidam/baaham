@@ -1,50 +1,76 @@
-# [PROJECT_NAME] Constitution
+<!--
+Sync Impact Report
+- Version change: unknown -> 1.0.0
+- Modified principles:
+  - PRINCIPLE_1_NAME -> Coding Standards
+  - PRINCIPLE_2_NAME -> Real-Time Principles
+  - PRINCIPLE_3_NAME -> Security and Auth
+  - PRINCIPLE_4_NAME -> Interoperability & Protocols (new title)
+  - PRINCIPLE_5_NAME -> Simplicity
+- Added sections:
+  - Tech Stack and Architecture (section)
+- Removed sections: none
+- Templates requiring updates:
+  - .specify/templates/plan-template.md: ⚠ pending (file not present)
+  - .specify/templates/spec-template.md: ⚠ pending (file not present)
+  - .specify/templates/tasks-template.md: ⚠ pending (file not present)
+  - .specify/templates/commands/*.md: ⚠ pending (no commands directory found)
+- Runtime/docs checked: README.md, docs/quickstart.md: ⚠ pending (files not present)
+- Follow-up TODOs:
+  - RATIFICATION_DATE is unknown — TODO(RATIFICATION_DATE): provide original adoption date
+-->
+
+# Baaham Constitution
+
 <!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### Coding Standards
+Go: Follow idiomatic Go project layout. Ensure strong error handling.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+React: Use Functional Components and Hooks. Use a distinct folder structure for components, hooks, and context.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+Styling: Use Tailwind utility classes exclusively. Avoid external CSS files where possible.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### Real-Time Principles
+Single Source of Truth: The server maintains the master state for video playback timestamp and pause/play status.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+Optimistic UI: Clients update immediately on user action but revert if the server contradicts.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+Simplicity Constraint: Optimize logic for rooms with exactly 2 users to simplify synchronization, but write code that doesn't hard-crash if a 3rd joins.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### Security and Auth
+Auth: JWT (JSON Web Tokens) for stateless authentication.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+Roles: Strict separation. Admins manage data; Users consume it.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+Sockets: Authenticate WebSocket connections via JWT query parameter or initial handshake.
+
+### Interoperability & Protocols
+Protocol: Strict JSON format for all WebSocket messages. Follow consistent message envelopes and version the envelope schema when changes occur.
+
+### Simplicity
+Prioritize clear, minimal solutions that are easy to reason about and maintain. Prefer small, well-documented components and avoid premature optimization.
+
+## Tech Stack and Architecture
+Backend: Go (Golang). Use standard library or a lightweight router like Chi.
+Frontend: Vite with React (TypeScript) and Tailwind CSS.
+Communication: REST API for authentication and management. WebSockets for all real-time features (Chat, Sync, Whiteboard).
+Protocol: Strict JSON format for all WebSocket messages.
+
+## Development Workflow
+Code reviews, CI checks, and automated tests MUST validate compliance with this constitution for relevant changes. Major or breaking changes to principles or protocols require a documented migration plan and explicit approval by project maintainers.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+All contributions MUST demonstrate how they adhere to the constitution. Amendments follow semantic versioning rules: MAJOR for incompatible governance changes, MINOR for added principles or material expansions, PATCH for wording/clarity fixes.
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+Amendment procedure:
+- Propose change in a PR with rationale, tests/migrations, and impact analysis.
+- Two maintainer approvals required for MINOR/PATCH; three required for MAJOR changes.
+- Final ratification date recorded in the constitution.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+Compliance review expectations:
+- PRs touching protocol, auth, or synchronization code MUST include compatibility tests and a roll-forward/rollback plan.
+
+**Version**: 1.0.0 | **Ratified**: TODO(RATIFICATION_DATE): original adoption date needed | **Last Amended**: 2025-12-15
