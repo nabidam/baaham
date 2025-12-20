@@ -21,6 +21,11 @@ func main() {
 		cfg.Logger.Fatal("db init failed", zap.Error(err))
 	}
 
+	migratiuonErr := database.RunMigrations(db)
+	if migratiuonErr != nil {
+		cfg.Logger.Fatal("migration failed", zap.Error(migratiuonErr))
+	}
+
 	mainRepo := repository.NewMainRepository(db)
 	mainSvc := service.NewMainService(mainRepo)
 	mainHandler := handler.NewMainHandler(mainSvc)
