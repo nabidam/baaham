@@ -15,8 +15,9 @@ type User struct {
 }
 
 type UserRepository interface {
-	Create(ctx context.Context, username string, password string, isAdmin bool) (*User, error)
+	Create(ctx context.Context, username string, passwordHash string, isAdmin bool) (*User, error)
 	List(ctx context.Context) ([]User, error)
+	UpdatePassword(ctx context.Context, username string, passwordHash string) error
 	Delete(ctx context.Context, username string) error
 }
 
