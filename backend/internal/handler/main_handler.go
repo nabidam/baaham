@@ -3,7 +3,7 @@ package handler
 import "github.com/nabidam/baaham/internal/service"
 
 type MainHandler struct {
-	HealthHandler *HealthHandler
+	HealthHandler IHealthHandler
 }
 
 func NewMainHandler(mainSvc *service.MainService) *MainHandler {

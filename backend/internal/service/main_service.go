@@ -3,7 +3,7 @@ package service
 import "github.com/nabidam/baaham/internal/repository"
 
 type MainService struct {
-	HealthService *HealthService
+	HealthService IHealthService
 }
 
 func NewMainService(repo *repository.MainRepository) *MainService {

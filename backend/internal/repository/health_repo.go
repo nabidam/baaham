@@ -6,6 +6,10 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
+type IHealthRepository interface {
+	Check(ctx context.Context) (bool, error)
+}
+
 type HealthRepository struct {
 	db *pgxpool.Pool
 }

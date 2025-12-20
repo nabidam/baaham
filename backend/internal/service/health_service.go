@@ -6,11 +6,15 @@ import (
 	"github.com/nabidam/baaham/internal/repository"
 )
 
-type HealthService struct {
-	repo *repository.HealthRepository
+type IHealthService interface {
+	HealthCheck(ctx context.Context) (bool, error)
 }
 
-func NewHealthService(r *repository.HealthRepository) *HealthService {
+type HealthService struct {
+	repo repository.IHealthRepository
+}
+
+func NewHealthService(r repository.IHealthRepository) *HealthService {
 	return &HealthService{repo: r}
 }
 

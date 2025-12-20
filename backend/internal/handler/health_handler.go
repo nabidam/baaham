@@ -7,11 +7,15 @@ import (
 	"github.com/nabidam/baaham/internal/service"
 )
 
-type HealthHandler struct {
-	svc *service.HealthService
+type IHealthHandler interface {
+	HealthCheck(*gin.Context)
 }
 
-func NewHealthHandler(svc *service.HealthService) *HealthHandler {
+type HealthHandler struct {
+	svc service.IHealthService
+}
+
+func NewHealthHandler(svc service.IHealthService) *HealthHandler {
 	return &HealthHandler{svc: svc}
 }
 
