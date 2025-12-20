@@ -1,16 +1,16 @@
 package service
 
-import "context"
+import (
+	"context"
 
-type HealthRepository interface {
-	Check(ctx context.Context) (bool, error)
-}
+	"github.com/nabidam/baaham/internal/domain"
+)
 
 type HealthService struct {
-	repo HealthRepository
+	repo domain.HealthRepository
 }
 
-func NewHealthService(r HealthRepository) *HealthService {
+func NewHealthService(r domain.HealthRepository) domain.HealthService {
 	return &HealthService{repo: r}
 }
 

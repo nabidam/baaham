@@ -1,9 +1,12 @@
 package repository
 
-import "github.com/jackc/pgx/v5/pgxpool"
+import (
+	"github.com/jackc/pgx/v5/pgxpool"
+	"github.com/nabidam/baaham/internal/domain"
+)
 
 type MainRepository struct {
-	HealthRepository *HealthRepository
+	HealthRepository domain.HealthRepository
 }
 
 func NewMainRepository(db *pgxpool.Pool) *MainRepository {
