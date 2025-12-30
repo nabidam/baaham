@@ -19,6 +19,7 @@ type UserRepository interface {
 	List(ctx context.Context) ([]User, error)
 	UpdatePassword(ctx context.Context, username string, passwordHash string) error
 	Delete(ctx context.Context, username string) error
+	GetByUsername(ctx context.Context, username string) (*User, error)
 }
 
 type UserService interface {

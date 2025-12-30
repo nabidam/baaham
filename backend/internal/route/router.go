@@ -12,6 +12,12 @@ func RegisterRoutes(r *gin.Engine, h *handler.MainHandler) {
 		// Health check
 		RegisterHelathRoutes(api, h.HealthHandler)
 
+		// Auth routes
+		authGroup := api.Group("/auth")
+		{
+			RegisterAuthRoutes(authGroup, h.AuthHandler)
+		}
+
 	}
 
 	// Health check (no auth)

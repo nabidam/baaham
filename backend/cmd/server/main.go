@@ -27,7 +27,7 @@ func main() {
 	}
 
 	mainRepo := repository.NewMainRepository(db)
-	mainSvc := service.NewMainService(mainRepo)
+	mainSvc := service.NewMainService(mainRepo, cfg)
 	mainHandler := handler.NewMainHandler(mainSvc)
 
 	r := api.New(cfg, mainHandler)

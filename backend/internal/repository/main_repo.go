@@ -7,9 +7,11 @@ import (
 
 type MainRepository struct {
 	HealthRepository domain.HealthRepository
+	UserRepository   domain.UserRepository
 }
 
 func NewMainRepository(db *pgxpool.Pool) *MainRepository {
 	healthRepo := NewHealthRepository(db)
-	return &MainRepository{HealthRepository: healthRepo}
+	userRepo := NewUserRepository(db)
+	return &MainRepository{HealthRepository: healthRepo, UserRepository: userRepo}
 }

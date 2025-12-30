@@ -87,3 +87,23 @@ func (repo *UserRepository) Delete(ctx context.Context, username string) error {
 	`, username)
 	return err
 }
+
+func (repo *UserRepository) GetByUsername(ctx context.Context, username string) (*domain.User, error) {
+	var u domain.User
+	err := repo.db.QueryRow(ctx, `
+		SELECT id, username, password_hash, is_admin, created_at, updated_at
+		FROM users
+		WHERE username = $1
+	`, username).Scan(
+		&u.ID,
+		&u.Username,
+		&u.PasswordHash,
+		&u.IsAdmin,
+		&u.CreatedAt,
+		&u.UpdatedAt,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return &u, nil
+}
